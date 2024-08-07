@@ -7,9 +7,9 @@ import { Card, Container } from "react-bootstrap";
 import { ManageAddNav } from "../templates/SiteNavBar";
 import { getDocs, collection } from "firebase/firestore";
 
+
 export default function UserManage() {
     const [user, loading] = useAuthState(auth);
-    const [isAdmin, setIsAdmin] = useState(false);
     const [userList, setUserList] = useState([]);
     const navigate = useNavigate();
 
@@ -23,6 +23,10 @@ export default function UserManage() {
     }
 
     function DataList({id, permission, name}) {
+        let permission_string = "";
+        for (let i=0;i<permission.length;i++) {
+            permission_string = permission_string + permission[i] + "/";
+        }
 
         return (
             <Card style={{
@@ -33,7 +37,7 @@ export default function UserManage() {
                 }}>{name}</Card.Title>
                 <Card.Text style={{
                     textAlign: "center"
-                }}>Permissions: {permission}</Card.Text>
+                }}>Permissions: {permission_string}</Card.Text>
             </Card>
         )
     }
@@ -49,7 +53,6 @@ export default function UserManage() {
         if (loading) return;
         if (user) {
             const checkAdmin = adminList.includes(user.uid);
-            setIsAdmin(checkAdmin);
             if (!checkAdmin) {
                 return navigate("/");
             }
