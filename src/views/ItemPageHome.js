@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase";
 import { useEffect, useState } from "react";
 import { HomeNav } from "../templates/SiteNavBar";
-import { checkAdmin } from "../extFunctions";
+import { adminList } from "../extFunctions";
 import { Container } from "react-bootstrap";
 
 export default function HomePage() {
@@ -15,7 +15,8 @@ export default function HomePage() {
     useEffect(() => {
         if (loading) return;
         if (!user) return navigate("/login");
-        setIsAdmin(checkAdmin(user.uid));
+        const checkAdmin = adminList.includes(user.uid);
+        setIsAdmin(checkAdmin)
     }, [user, loading, navigate]);
 
     return (

@@ -4,7 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { checkAdmin } from "../extFunctions";
+import { adminList } from "../extFunctions";
 
 
 export function HomeNav() {
@@ -13,9 +13,12 @@ export function HomeNav() {
     
     useEffect(() => {
         if (loading) return;
-        if (user) setIsAdmin(checkAdmin(user.uid));
+        if (user) {
+            const checkAdmin = adminList.includes(user.uid);
+            setIsAdmin(checkAdmin);
+        };
         
-    })
+    }, [user, loading])
 
     return (
         <Navbar variant="light" bg="light">
@@ -23,7 +26,6 @@ export function HomeNav() {
             <Navbar.Brand href="/">Home</Navbar.Brand>
             <Nav>
                 {isAdmin && <Nav.Link href="/userManage">Manage Users</Nav.Link>}
-                {!user && <Nav.Link href="/login">Login</Nav.Link>}
                 {user && <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>}
             </Nav>
             </Container>
@@ -42,7 +44,7 @@ export function ManageAddNav() {
             <Nav>
                 {pathname === "/addUser" &&<Nav.Link href="/userManage">Manage Users</Nav.Link>}
                 {pathname === "/userManage" && <Nav.Link href={`/addUser`}>Add User</Nav.Link>}
-                <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
+                <Nav.Link href={`/login`} onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
             </Nav>
             </Container>
         </Navbar>
