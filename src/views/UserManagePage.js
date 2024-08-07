@@ -3,7 +3,7 @@ import { auth, dB } from "../firebase";
 import { adminList } from "../extFunctions";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Card, Container, Row, Col } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { ManageAddNav } from "../templates/SiteNavBar";
 import { getDocs, collection } from "firebase/firestore";
 
@@ -55,7 +55,7 @@ export default function UserManage() {
             }
             getUser();
         }
-    }, [user, loading]);
+    }, [user, loading]); // not sure why it cannot have setIsAdmin function
     
     return (
         <>
