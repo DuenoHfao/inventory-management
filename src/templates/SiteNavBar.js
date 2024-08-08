@@ -25,6 +25,7 @@ export function HomeNav() {
             <Container>
             <Navbar.Brand href="/">Home</Navbar.Brand>
                 <Nav>
+                    {isAdmin && <Nav.Link href="/logs">Logs</Nav.Link>}
                     {isAdmin && <Nav.Link href="/userManage">Manage Users</Nav.Link>}
                     <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
                 </Nav>
@@ -57,6 +58,20 @@ export function BookingNav() {
             <Container>
             <Navbar.Brand href="/">Home</Navbar.Brand>
             <Nav>
+                <Nav.Link href={`/login`} onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
+            </Nav>
+            </Container>
+        </Navbar>
+    )
+}
+
+export function LoggingNav() {
+    return (
+        <Navbar variant="light" bg="light">
+            <Container>
+            <Navbar.Brand href="/">Home</Navbar.Brand>
+            <Nav>
+                <Nav.Link href="/userManage">Manage Users</Nav.Link>
                 <Nav.Link href={`/login`} onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
             </Nav>
             </Container>
