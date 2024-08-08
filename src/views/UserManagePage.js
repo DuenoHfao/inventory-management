@@ -12,6 +12,7 @@ export default function UserManage() {
     const [user, loading] = useAuthState(auth);
     const [userList, setUserList] = useState([]);
     const navigate = useNavigate();
+    console.log(auth.currentUser);
 
     async function getUser() {
         const query = await getDocs(collection(dB, "users"));
@@ -25,8 +26,10 @@ export default function UserManage() {
     async function handleDelete(e) {
         const deleteUserID = e.target.value;
         const deleteDatabaseUser = e.target.id;
-        await deleteDoc(doc(dB, "users", deleteDatabaseUser));
-        navigate("/userManage")
+        // await deleteDoc(doc(dB, "users", deleteDatabaseUser));
+        // navigate("/userManage");
+
+
     }
 
     function DataList({id, permission, name, uid}) {
@@ -52,14 +55,14 @@ export default function UserManage() {
                         }}>Permissions: {permission_string}</Card.Text>
                     </Card>
                 </Col>
-                <Col>
+                {/* <Col>
                     <Button id={uid}
                         value={id}
                         variant="danger"
                         onClick={handleDelete}>
                         Delete
                     </Button>
-                </Col>
+                </Col> */}
             </Row>
         )
     }
