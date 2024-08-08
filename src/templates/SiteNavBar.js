@@ -27,6 +27,7 @@ export function HomeNav() {
                 <Nav>
                     {isAdmin && <Nav.Link href="/logs">Logs</Nav.Link>}
                     {isAdmin && <Nav.Link href="/userManage">Manage Users</Nav.Link>}
+                    <Nav.Link href="/addItem">Add Item</Nav.Link>
                     <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
                 </Nav>
             </Container>
@@ -35,6 +36,7 @@ export function HomeNav() {
 }
 
 export function ManageAddNav() {
+    useAuthState(auth);
     const location = useLocation();
     const {pathname} = location;
 
@@ -52,7 +54,8 @@ export function ManageAddNav() {
     )
 }
 
-export function BookingNav() {
+export function BookingAddNav() {
+    useAuthState(auth);
     return (
         <Navbar variant="light" bg="light">
             <Container>

@@ -3,7 +3,7 @@ import { auth, dB } from "../firebase"
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
-import { BookingNav } from "../templates/SiteNavBar";
+import { BookingAddNav } from "../templates/SiteNavBar";
 import QRCode from "react-qr-code";
 import { Container, Form } from "react-bootstrap";
 
@@ -55,15 +55,18 @@ export default function BookingPage() {
             for (let j=0; j<userPermissions.length; j++) {
                 if (itemClass[i] == userPermissions[j]) {
                     return (
-                            <QRCode id={id} value={id} 
+                        <>
+                            {description && <QRCode id={id} value={id} 
                                 onClick={handleQRClick} 
                                 style={{
                                     cursor: "pointer"
-                                }}/>
+                                }}/>}
+                        </>
                     )
                 }
             }
         }
+        return <div>You do not have permission to access this item.</div>
     }
 
     useEffect(() => {
@@ -76,7 +79,7 @@ export default function BookingPage() {
 
     return (
         <>
-            <BookingNav />
+            <BookingAddNav />
             <Container style={{
                             marginTop: "1rem",
                             marginLeft: "auto",

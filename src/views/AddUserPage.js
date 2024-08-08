@@ -4,7 +4,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, dB } from "../firebase";
 import { Container, Form, Button } from "react-bootstrap";
 import Select from "react-select";
-import { addDoc,collection } from "firebase/firestore";
+import { addDoc,collection, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { adminList } from "../extFunctions";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -13,7 +13,6 @@ export default function AddUser() {
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [uid, setUID] = useState("");
     const [userPermissions, setUserPermissions] = useState([]);
     const [userSuccess, setUserSuccess] = useState(false);
     const permissionOptions = [
@@ -25,17 +24,15 @@ export default function AddUser() {
     const [user, loading] = useAuthState(auth);
 
     async function addUser() {
-        createUserWithEmailAndPassword(auth, email ,password).then((userCredentials) => {
-            setUID(userCredentials.user.uid);
+        await createUserWithEmailAndPassword(auth, email ,password).then(async (userCredentials) => {
+            let userUID = userCredentials.user.uid;
+            await addDoc(collection(dB, "users"), {userID: userUID, userName: userName, permission: userPermissions});
             setUserSuccess(true);
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.Message;
             console.log(`${errorCode}: ${errorMessage}`);
         });
-        await addDoc(collection(dB, "users"), {userID: uid, userName: userName, permission: userPermissions}).then(() => {
-        });
-
         navigate("/userManage");
     }
 

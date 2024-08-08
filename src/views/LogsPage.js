@@ -71,7 +71,7 @@ export default function LogsPage() {
                 marginRight: "auto",
                 width: "50%"
             }}>
-                <Card.Title>{itemName} used by {userName}</Card.Title>
+                <Card.Title>{itemName} by {userName}</Card.Title>
                 <Row>
                     <Col>
                         <Card.Text>{formattedDate}</Card.Text>
