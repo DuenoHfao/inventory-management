@@ -3,6 +3,7 @@ import LoginPage from "./views/LoginPage";
 import HomePage from "./views/ItemPageHome";
 import UserManage from "./views/UserManagePage";
 import AddUser from "./views/AddUserPage";
+import BookingPage from "./views/BookingPage";
 
 
 function App() {
@@ -11,7 +12,8 @@ function App() {
     {path: "/", element: <HomePage />},
     {path: "/login", element: <LoginPage />},
     {path: "/userManage", element: <UserManage />},
-    {path: "/addUser", element: <AddUser />}
+    {path: "/addUser", element: <AddUser />},
+    {path: "/bookings/:id", element: <BookingPage />}
   ])
 
   return (

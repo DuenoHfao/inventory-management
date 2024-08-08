@@ -19,7 +19,7 @@ export default function AddUser() {
     const permissionOptions = [
         {value: "logistics", label: "logistics"},
         {value: "demo", label: "demo"},
-        {value: "test_bench", label: "test_bench"}
+        {value: "testing", label: "testing"}
     ];
     const navigate = useNavigate();
     const [user, loading] = useAuthState(auth);
@@ -63,7 +63,7 @@ export default function AddUser() {
             <h1 style={{ marginBlock: "1rem" }}>Add User</h1>
             <Form>
                 <Form.Group className="mb-3" controlId="userName">
-                    <Form.Label>UserName</Form.Label>
+                    <Form.Label>Username</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter username"

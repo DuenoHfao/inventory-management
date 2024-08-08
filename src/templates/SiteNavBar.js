@@ -24,10 +24,10 @@ export function HomeNav() {
         <Navbar variant="light" bg="light">
             <Container>
             <Navbar.Brand href="/">Home</Navbar.Brand>
-            <Nav>
-                {isAdmin && <Nav.Link href="/userManage">Manage Users</Nav.Link>}
-                {user && <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>}
-            </Nav>
+                <Nav>
+                    {isAdmin && <Nav.Link href="/userManage">Manage Users</Nav.Link>}
+                    <Nav.Link onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
+                </Nav>
             </Container>
         </Navbar>
     )
@@ -51,3 +51,15 @@ export function ManageAddNav() {
     )
 }
 
+export function BookingNav() {
+    return (
+        <Navbar variant="light" bg="light">
+            <Container>
+            <Navbar.Brand href="/">Home</Navbar.Brand>
+            <Nav>
+                <Nav.Link href={`/login`} onClick={(e) => signOut(auth)}>Sign Out</Nav.Link>
+            </Nav>
+            </Container>
+        </Navbar>
+    )
+}
